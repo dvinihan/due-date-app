@@ -16,12 +16,16 @@ export default async function handler(
   const { insertedId } = await guesses.insertOne(newGuess);
 
   const socket = new WebSocket(WEB_SOCKET_URL);
+  console.log("connected to socket from newGuess API server");
   socket.on("open", function open() {
+    console.log("socket opened");
     const messageJson = JSON.stringify(
       new GuessWithId({ ...newGuess, _id: insertedId.toString() })
     );
+    console.log("message sent:", messageJson);
     socket.send(messageJson);
   });
-
+  console.log("about to send response from newGuess API");
   res.send({});
+  console.log("done with newGuess API");
 }

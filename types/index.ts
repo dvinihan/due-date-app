@@ -3,7 +3,6 @@ export class GuessWithoutId {
   date: Date;
 
   constructor(props: Partial<GuessWithoutId> = {}) {
-    console.log(typeof props);
     this.name = props.name || "";
     this.date = new Date(props.date ?? "");
   }
