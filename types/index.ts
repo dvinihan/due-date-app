@@ -1,10 +1,11 @@
 export class GuessWithoutId {
   name: string;
-  date: string;
+  date: Date;
 
   constructor(props: Partial<GuessWithoutId> = {}) {
+    console.log(typeof props);
     this.name = props.name || "";
-    this.date = props.date || "";
+    this.date = new Date(props.date ?? "");
   }
 }
 

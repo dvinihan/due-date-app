@@ -18,8 +18,12 @@
     "mongodb": "^5.1.0",
     "next": "13.2.3",
     "react": "18.2.0",
+    "react-datepicker": "^4.10.0",
     "react-dom": "18.2.0",
     "typescript": "4.9.5",
     "ws": "^8.12.1"
+  },
+  "devDependencies": {
+    "@types/react-datepicker": "^4.10.0"
   }
 }
