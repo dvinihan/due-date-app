@@ -1,8 +1,8 @@
-import { Guess } from "@/types";
+import { GuessWithId } from "@/types";
 import { useEffect, useState } from "react";
 
 export default function Home() {
-  const [guesses, setGuesses] = useState<Guess[]>([]);
+  const [guesses, setGuesses] = useState<GuessWithId[]>([]);
 
   useEffect(() => {
     const fetchGuesses = async () => {
@@ -11,6 +11,16 @@ export default function Home() {
       setGuesses(data.guesses);
     };
     fetchGuesses();
+  }, []);
+
+  useEffect(() => {
+    const socket = new WebSocket("ws://localhost:8080");
+    socket.addEventListener("message", async (event) => {
+      const messageText = await event?.data?.text();
+      const messageJson = JSON.parse(messageText);
+      const newGuess = new GuessWithId(messageJson);
+      setGuesses((current) => [...current, newGuess]);
+    });
   }, []);
 
   return (
