@@ -1,7 +1,7 @@
-import { WEB_SOCKET_URL } from "@/constants";
+import { AppContext } from "@/pages/_app";
 import { GuessWithId } from "@/types";
 import Link from "next/link";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import useSwr, { useSWRConfig } from "swr";
 
 const fetchGuesses = async (): Promise<GuessWithId[]> => {
@@ -11,6 +11,7 @@ const fetchGuesses = async (): Promise<GuessWithId[]> => {
 };
 
 export const CalendarPage = () => {
+  const { socket } = useContext(AppContext);
   const { mutate } = useSWRConfig();
 
   const { data: guesses = [] } = useSwr<GuessWithId[]>(
@@ -19,18 +20,14 @@ export const CalendarPage = () => {
   );
 
   useEffect(() => {
-    const socket = new WebSocket(WEB_SOCKET_URL);
-    socket.addEventListener("message", async (event) => {
+    socket?.addEventListener("message", async (event) => {
       console.log("message received:", await event?.data?.text());
       const messageText = await event?.data?.text();
       const messageJson = JSON.parse(messageText);
       const newGuess = new GuessWithId(messageJson);
-      mutate("/api/guesses", (current) => [...current, newGuess]);
+      mutate("/api/guesses", (current: any) => [...current, newGuess]);
     });
-    return () => {
-      socket.close();
-    };
-  }, [mutate]);
+  }, [mutate, socket]);
 
   return (
     <div>

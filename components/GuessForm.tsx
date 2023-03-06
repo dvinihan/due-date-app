@@ -1,14 +1,17 @@
-import { useState } from "react";
+import { AppContext } from "@/pages/_app";
+import { GuessWithId, GuessWithoutId } from "@/types";
+import { useContext, useState } from "react";
 import DatePicker from "react-datepicker";
 
 export const GuessForm = () => {
+  const { socket } = useContext(AppContext);
   const [name, setName] = useState("");
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
 
   const [showError, setShowError] = useState(false);
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     setShowError(false);
 
     if (!name || !date || !time) {
@@ -18,10 +21,18 @@ export const GuessForm = () => {
 
     const wholeDate = new Date(`${date} ${time}`);
 
-    fetch("/api/newGuess", {
+    const newGuess = new GuessWithoutId({ name, date: wholeDate });
+    const res = await fetch("/api/newGuess", {
       method: "POST",
-      body: JSON.stringify({ name, date: wholeDate }),
+      body: JSON.stringify(newGuess),
     });
+    const data = await res.json();
+    const { newGuessId } = data;
+
+    const messageJson = JSON.stringify(
+      new GuessWithId({ ...newGuess, _id: newGuessId })
+    );
+    socket?.send(messageJson);
   };
 
   return (

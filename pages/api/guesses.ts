@@ -14,18 +14,13 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data | Error>
 ) {
-  try {
-    const client = await clientPromise;
-    const db = client.db("due-date");
+  const client = await clientPromise;
+  const db = client.db("due-date");
 
-    const guesses = await db
-      .collection<GuessWithoutId>("guesses")
-      .find({})
-      .toArray();
+  const guesses = await db
+    .collection<GuessWithoutId>("guesses")
+    .find({})
+    .toArray();
 
-    res.status(200).json({ guesses });
-  } catch (error: any) {
-    console.log(error);
-    res.status(500).json({ message: error?.message });
-  }
+  res.status(200).json({ guesses });
 }
