@@ -6,18 +6,26 @@ import { GuessWithoutId } from "@/types";
 type Data = {
   guesses: GuessWithoutId[];
 };
+type Error = {
+  message: string;
+};
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Data>
+  res: NextApiResponse<Data | Error>
 ) {
-  const client = await clientPromise;
-  const db = client.db("due-date");
+  try {
+    const client = await clientPromise;
+    const db = client.db("due-date");
 
-  const guesses = await db
-    .collection<GuessWithoutId>("guesses")
-    .find({})
-    .toArray();
+    const guesses = await db
+      .collection<GuessWithoutId>("guesses")
+      .find({})
+      .toArray();
 
-  res.status(200).json({ guesses });
+    res.status(200).json({ guesses });
+  } catch (error: any) {
+    console.log(error);
+    res.status(500).json({ message: error?.message });
+  }
 }

@@ -19,15 +19,12 @@ export const CalendarPage = () => {
   );
 
   useEffect(() => {
-    console.log("running useeffect");
     const socket = new WebSocket(WEB_SOCKET_URL);
-    console.log("connected to socket from CalendarPage");
     socket.addEventListener("message", async (event) => {
       console.log("message received:", await event?.data?.text());
       const messageText = await event?.data?.text();
       const messageJson = JSON.parse(messageText);
       const newGuess = new GuessWithId(messageJson);
-      console.log("setting message to guesses state");
       mutate("/api/guesses", (current) => [...current, newGuess]);
     });
     return () => {
