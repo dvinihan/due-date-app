@@ -1,7 +1,6 @@
 import { AppContext } from "@/pages/_app";
-import { GuessWithId, GuessWithoutId } from "@/types";
+import { GuessWithoutId } from "@/types";
 import { useContext, useState } from "react";
-import DatePicker from "react-datepicker";
 
 export const GuessForm = () => {
   const { socket } = useContext(AppContext);
@@ -22,17 +21,13 @@ export const GuessForm = () => {
     const wholeDate = new Date(`${date} ${time}`);
 
     const newGuess = new GuessWithoutId({ name, date: wholeDate });
-    const res = await fetch("/api/newGuess", {
+    await fetch("/api/newGuess", {
       method: "POST",
       body: JSON.stringify(newGuess),
     });
-    const data = await res.json();
-    const { newGuessId } = data;
 
-    const messageJson = JSON.stringify(
-      new GuessWithId({ ...newGuess, _id: newGuessId })
-    );
-    socket?.send(messageJson);
+    // the message text doesn't matter
+    socket?.send("refresh");
   };
 
   return (

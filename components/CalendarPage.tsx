@@ -2,7 +2,7 @@ import { AppContext } from "@/pages/_app";
 import { GuessWithId } from "@/types";
 import Link from "next/link";
 import { useContext, useEffect } from "react";
-import useSwr, { useSWRConfig } from "swr";
+import useSwr from "swr";
 
 const fetchGuesses = async (): Promise<GuessWithId[]> => {
   const res = await fetch("/api/guesses");
@@ -12,19 +12,16 @@ const fetchGuesses = async (): Promise<GuessWithId[]> => {
 
 export const CalendarPage = () => {
   const { socket } = useContext(AppContext);
-  const { mutate } = useSWRConfig();
 
-  const { data: guesses = [] } = useSwr<GuessWithId[]>(
+  const { data: guesses = [], mutate } = useSwr<GuessWithId[]>(
     "/api/guesses",
     fetchGuesses
   );
 
   useEffect(() => {
-    const messageListener = async (event: WebSocketEventMap["message"]) => {
-      const messageText = await event?.data?.text();
-      const messageJson = JSON.parse(messageText);
-      const newGuess = new GuessWithId(messageJson);
-      mutate("/api/guesses", [...guesses, newGuess]);
+    const messageListener = () => {
+      // invalidate the cache to cause a re-fetch
+      mutate();
     };
 
     socket?.addEventListener("message", messageListener);
