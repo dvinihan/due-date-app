@@ -20,14 +20,19 @@ export const CalendarPage = () => {
   );
 
   useEffect(() => {
-    socket?.addEventListener("message", async (event) => {
-      console.log("message received:", await event?.data?.text());
+    const messageListener = async (event: WebSocketEventMap["message"]) => {
       const messageText = await event?.data?.text();
       const messageJson = JSON.parse(messageText);
       const newGuess = new GuessWithId(messageJson);
-      mutate("/api/guesses", (current: any) => [...current, newGuess]);
-    });
-  }, [mutate, socket]);
+      mutate("/api/guesses", [...guesses, newGuess]);
+    };
+
+    socket?.addEventListener("message", messageListener);
+
+    return () => {
+      socket?.removeEventListener("message", messageListener);
+    };
+  }, [guesses, mutate, socket]);
 
   return (
     <div>
