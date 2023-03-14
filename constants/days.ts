@@ -1,15 +1,15 @@
 import { CalendarDay } from "@/types";
 
 export const daysMap: CalendarDay[][] = [
-  [
-    { dayOfWeek: "Sunday", date: 21, month: "May" },
-    { dayOfWeek: "Monday", date: 22, month: "May" },
-    { dayOfWeek: "Tuesday", date: 23, month: "May" },
-    { dayOfWeek: "Wednesday", date: 24, month: "May" },
-    { dayOfWeek: "Thursday", date: 25, month: "May" },
-    { dayOfWeek: "Friday", date: 26, month: "May" },
-    { dayOfWeek: "Saturday", date: 27, month: "May" },
-  ],
+  // [
+  //   { dayOfWeek: "Sunday", date: 21, month: "May" },
+  //   { dayOfWeek: "Monday", date: 22, month: "May" },
+  //   { dayOfWeek: "Tuesday", date: 23, month: "May" },
+  //   { dayOfWeek: "Wednesday", date: 24, month: "May" },
+  //   { dayOfWeek: "Thursday", date: 25, month: "May" },
+  //   { dayOfWeek: "Friday", date: 26, month: "May" },
+  //   { dayOfWeek: "Saturday", date: 27, month: "May" },
+  // ],
   [
     { dayOfWeek: "Sunday", date: 28, month: "May" },
     { dayOfWeek: "Monday", date: 29, month: "May" },
