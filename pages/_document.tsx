@@ -5,7 +5,7 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head />
-      <body style={{ margin: `${bodyMarginHeight}vh` }}>
+      <body style={{ margin: bodyMarginHeight }}>
         <Main />
         <NextScript />
       </body>

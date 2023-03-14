@@ -46,7 +46,7 @@ export const Calendar = ({ guesses }: Props) => {
         <div
           key={i}
           style={{
-            height: `${dayOfWeekHeight}vh`,
+            height: dayOfWeekHeight,
             border: "1px solid black",
             display: "inline-block",
             backgroundColor: "lightgray",

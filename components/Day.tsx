@@ -1,10 +1,14 @@
 import {
-  dayHeight,
+  bodyMarginHeight,
+  dayOfWeekHeight,
   DAY_PADDING,
   DUE_DATE_BACKGROUND_COLOR,
   JUNE_BACKGROUND_COLOR,
   MAY_BACKGROUND_COLOR,
+  totalBorderHeight,
+  totalPaddingHeight,
 } from "@/constants";
+import { daysMap } from "@/constants/days";
 import { CalendarDay, GuessWithId } from "@/types";
 import moment from "moment";
 
@@ -29,7 +33,7 @@ export const Day = ({ day, guesses }: Props) => {
   return (
     <div
       style={{
-        height: `${dayHeight}vh`,
+        height: `calc((100vh - ${dayOfWeekHeight} - (2 * ${bodyMarginHeight}) - ${totalBorderHeight} - ${totalPaddingHeight}) / ${daysMap.length} )`,
         backgroundColor,
         padding: DAY_PADDING,
         border: "1px solid black",
