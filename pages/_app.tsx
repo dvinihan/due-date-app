@@ -1,3 +1,4 @@
+import { NavDrawer } from "@/components/NavDrawer";
 import { WEB_SOCKET_URL } from "@/constants";
 import type { AppProps } from "next/app";
 import { createContext, useEffect, useState } from "react";
@@ -20,6 +21,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     <AppContext.Provider value={{ socket }}>
+      <NavDrawer />
       <Component {...pageProps} />
     </AppContext.Provider>
   );

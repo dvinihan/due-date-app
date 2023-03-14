@@ -3,6 +3,7 @@ import { GuessWithId } from "@/types";
 import Link from "next/link";
 import { useContext, useEffect } from "react";
 import useSwr from "swr";
+import { Calendar } from "./Calendar";
 
 const fetchGuesses = async (): Promise<GuessWithId[]> => {
   const res = await fetch("/api/guesses");
@@ -31,14 +32,5 @@ export const CalendarPage = () => {
     };
   }, [guesses, mutate, socket]);
 
-  return (
-    <div>
-      <Link href="/newGuess">New Guess</Link>
-      {guesses.map((guess) => (
-        <div key={guess._id}>
-          {guess.name}: {guess.date.toString()}
-        </div>
-      ))}
-    </div>
-  );
+  return <Calendar guesses={guesses} />;
 };

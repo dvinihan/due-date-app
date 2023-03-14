@@ -8,46 +8,74 @@ export const GuessForm = () => {
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
 
-  const [showError, setShowError] = useState(false);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+
+  const clearForm = () => {
+    setName("");
+    setDate("");
+    setTime("");
+  };
 
   const handleSubmit = async () => {
-    setShowError(false);
+    try {
+      setError("");
+      setSuccess("");
 
-    if (!name || !date || !time) {
-      setShowError(true);
-      return;
+      if (!name || !date || !time) {
+        setError("Please fill in all fields");
+        return;
+      }
+
+      const wholeDate = new Date(`${date} ${time}`);
+
+      const newGuess = new GuessWithoutId({ name, date: wholeDate });
+      await fetch("/api/newGuess", {
+        method: "POST",
+        body: JSON.stringify(newGuess),
+      });
+
+      clearForm();
+      setSuccess("Great guess!");
+    } catch (error) {
+      setError("Oops, that didn't work. Please try again.");
     }
-
-    const wholeDate = new Date(`${date} ${time}`);
-
-    const newGuess = new GuessWithoutId({ name, date: wholeDate });
-    await fetch("/api/newGuess", {
-      method: "POST",
-      body: JSON.stringify(newGuess),
-    });
 
     // the message text doesn't matter
     socket?.send("refresh");
   };
 
   return (
-    <div>
-      <div>
-        <div>Name:</div>
-        <input onChange={(e) => setName(e.target.value)} />
-      </div>
-      <div>
-        <div>Date:</div>
-        <input type="date" onChange={(e) => setDate(e.target.value)} />
-      </div>
-      <div>
-        <div>Time:</div>
-        <input type="time" onChange={(e) => setTime(e.target.value)} />
-      </div>
-      <div>
-        <button onClick={handleSubmit}>Submit</button>
-      </div>
-      {showError && <div>Please fill out all fields.</div>}
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        flexDirection: "column",
+        fontSize: "20px",
+      }}
+    >
+      <div style={{ marginTop: "30px" }}>Name:</div>
+      <input onChange={(e) => setName(e.target.value)} value={name} />
+      <div style={{ marginTop: "30px" }}>Date:</div>
+      <input
+        type="date"
+        onChange={(e) => setDate(e.target.value)}
+        value={date}
+      />
+      <div style={{ marginTop: "30px" }}>Time:</div>
+      <input
+        type="time"
+        onChange={(e) => setTime(e.target.value)}
+        value={time}
+      />
+
+      <button onClick={handleSubmit} style={{ marginTop: "30px" }}>
+        Submit
+      </button>
+      {error && <div style={{ color: "red", marginTop: "30px" }}>{error}</div>}
+      {success && (
+        <div style={{ color: "green", marginTop: "30px" }}>{success}</div>
+      )}
     </div>
   );
 };

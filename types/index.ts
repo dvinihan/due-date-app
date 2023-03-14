@@ -16,3 +16,20 @@ export class GuessWithId extends GuessWithoutId {
     this._id = props._id || "";
   }
 }
+
+export type DayOfWeek =
+  | "Sunday"
+  | "Monday"
+  | "Tuesday"
+  | "Wednesday"
+  | "Thursday"
+  | "Friday"
+  | "Saturday";
+
+export type Month = "May" | "June";
+
+export type CalendarDay = {
+  dayOfWeek: DayOfWeek;
+  date: number;
+  month: Month;
+};
