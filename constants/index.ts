@@ -9,6 +9,7 @@ export const DUE_DATE_BACKGROUND_COLOR = "#d0f2d7";
 export const MAY_BACKGROUND_COLOR = "#ffe6fe";
 export const JUNE_BACKGROUND_COLOR = "#fff5e6";
 
+export const headerHeight = "6vh";
 export const dayOfWeekHeight = "3vh";
 export const bodyMarginHeight = "0.5vh";
 export const totalBorderHeight = `${2 + daysMap.length * 2}px`;

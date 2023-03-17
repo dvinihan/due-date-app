@@ -1,4 +1,4 @@
-import { dayOfWeekHeight, DAY_PADDING } from "@/constants";
+import { dayOfWeekHeight, DAY_PADDING, headerHeight } from "@/constants";
 import { daysMap } from "@/constants/days";
 import { GuessWithId } from "@/types";
 import { useMemo } from "react";
@@ -35,40 +35,53 @@ export const Calendar = ({ guesses }: Props) => {
   );
 
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        flexWrap: "wrap",
-      }}
-    >
-      {daysMap[0].map((day, i) => (
-        <div
-          key={i}
-          style={{
-            height: dayOfWeekHeight,
-            border: "1px solid black",
-            display: "inline-block",
-            backgroundColor: "lightgray",
-            padding: DAY_PADDING,
-            flex: "1 0 13%",
-          }}
-        >
-          {day.dayOfWeek}
-        </div>
-      ))}
-      {daysMap.map((week) =>
-        week.map((day, j) => (
-          <Day
-            day={day}
-            key={j}
-            guesses={
-              guessesByDate.get(getGuessKey(monthMap[day.month], day.date)) ??
-              []
-            }
-          />
-        ))
-      )}
-    </div>
+    <>
+      <div
+        style={{
+          height: headerHeight,
+          border: "1px solid black",
+          textAlign: "center",
+          fontSize: "30px",
+          fontFamily: "cursive",
+        }}
+      >
+        When will &quot;Baby P&quot; arrive?
+      </div>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          flexWrap: "wrap",
+        }}
+      >
+        {daysMap[0].map((day, i) => (
+          <div
+            key={i}
+            style={{
+              height: dayOfWeekHeight,
+              border: "1px solid black",
+              display: "inline-block",
+              backgroundColor: "lightgray",
+              padding: DAY_PADDING,
+              flex: "1 0 13%",
+            }}
+          >
+            {day.dayOfWeek}
+          </div>
+        ))}
+        {daysMap.map((week) =>
+          week.map((day, j) => (
+            <Day
+              day={day}
+              key={j}
+              guesses={
+                guessesByDate.get(getGuessKey(monthMap[day.month], day.date)) ??
+                []
+              }
+            />
+          ))
+        )}
+      </div>
+    </>
   );
 };

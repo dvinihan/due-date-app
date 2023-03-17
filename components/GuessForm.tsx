@@ -57,10 +57,15 @@ export const GuessForm = () => {
       <div style={{ marginTop: "30px" }}>Name:</div>
       <input onChange={(e) => setName(e.target.value)} value={name} />
       <div style={{ marginTop: "30px" }}>Date:</div>
+      <div style={{ fontSize: "14px", marginBottom: "4px" }}>
+        (Baby P is due June 8!)
+      </div>
       <input
         type="date"
         onChange={(e) => setDate(e.target.value)}
         value={date}
+        min="2023-05-28"
+        max="2023-06-17"
       />
       <div style={{ marginTop: "30px" }}>Time:</div>
       <input

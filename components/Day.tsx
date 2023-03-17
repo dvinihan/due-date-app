@@ -3,6 +3,7 @@ import {
   dayOfWeekHeight,
   DAY_PADDING,
   DUE_DATE_BACKGROUND_COLOR,
+  headerHeight,
   JUNE_BACKGROUND_COLOR,
   MAY_BACKGROUND_COLOR,
   totalBorderHeight,
@@ -33,7 +34,7 @@ export const Day = ({ day, guesses }: Props) => {
   return (
     <div
       style={{
-        height: `calc((100vh - ${dayOfWeekHeight} - (2 * ${bodyMarginHeight}) - ${totalBorderHeight} - ${totalPaddingHeight}) / ${daysMap.length} )`,
+        height: `calc((100vh - ${headerHeight} - ${dayOfWeekHeight} - (2 * ${bodyMarginHeight}) - ${totalBorderHeight} - ${totalPaddingHeight}) / ${daysMap.length} )`,
         backgroundColor,
         padding: DAY_PADDING,
         border: "1px solid black",
