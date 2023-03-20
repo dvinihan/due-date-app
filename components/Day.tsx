@@ -3,18 +3,23 @@ import {
   DUE_DATE_BACKGROUND_COLOR,
   JUNE_BACKGROUND_COLOR,
   MAY_BACKGROUND_COLOR,
+  bodyMarginHeight,
+  dayOfWeekHeight,
+  headerHeight,
+  totalBorderHeight,
+  totalPaddingHeight,
 } from "@/constants";
 import { CalendarDay, GuessWithId } from "@/types";
 import moment from "moment";
+import { useEffect, useState } from "react";
+import { daysMap } from "@/constants/days";
 
 type Props = {
   day: CalendarDay;
   guesses: GuessWithId[];
-  dayHeight: string;
-  guessFontSize: string;
 };
 
-export const Day = ({ day, guesses, dayHeight, guessFontSize }: Props) => {
+export const Day = ({ day, guesses }: Props) => {
   const isDueDate = day.month === "June" && day.date === 8;
 
   const backgroundColor = isDueDate
@@ -26,6 +31,20 @@ export const Day = ({ day, guesses, dayHeight, guessFontSize }: Props) => {
   const sortedGuesses = guesses.sort(
     (a, b) => a.date.getTime() - b.date.getTime()
   );
+
+  const [dayHeight, setDayHeight] = useState("");
+  const [guessFontSize, setGuessFontSize] = useState("");
+
+  useEffect(() => {
+    const extraHeights = `${headerHeight} - ${dayOfWeekHeight} - (2 * ${bodyMarginHeight}) - ${totalBorderHeight} - ${totalPaddingHeight}`;
+    const newDayHeight = `((100vh - ${extraHeights}) / ${daysMap.length})`;
+    const dateNumberHeight =
+      document?.getElementById("date-number")?.offsetHeight;
+    const guessContainerHeight = `(${newDayHeight} - ${dateNumberHeight}px)`;
+    const singleGuessHeight = `(${guessContainerHeight} / ${guesses.length})`;
+    setDayHeight(newDayHeight);
+    setGuessFontSize(`(${singleGuessHeight} - 0.4vh)`);
+  }, [guesses.length]);
 
   return (
     <div

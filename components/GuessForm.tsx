@@ -60,10 +60,28 @@ export const GuessForm = () => {
         fontSize: "20px",
       }}
     >
-      <div style={{ marginTop: "30px" }}>First Name:</div>
-      <input onChange={(e) => setFirstName(e.target.value)} value={firstName} />
-      <div style={{ marginTop: "30px" }}>Last Name:</div>
-      <input onChange={(e) => setLastName(e.target.value)} value={lastName} />
+      <div
+        style={{
+          marginTop: "30px",
+          display: "flex",
+          justifyContent: "space-between",
+        }}
+      >
+        <div style={{ margin: "15px" }}>
+          <div>First Name:</div>
+          <input
+            onChange={(e) => setFirstName(e.target.value)}
+            value={firstName}
+          />
+        </div>
+        <div style={{ margin: "15px" }}>
+          <div>Last Name:</div>
+          <input
+            onChange={(e) => setLastName(e.target.value)}
+            value={lastName}
+          />
+        </div>
+      </div>
       <div style={{ marginTop: "30px" }}>Date:</div>
       <div style={{ fontSize: "14px", marginBottom: "4px" }}>
         (Baby P is due June 8!)
