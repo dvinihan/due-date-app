@@ -1,6 +1,5 @@
 import { AppContext } from "@/pages/_app";
 import { GuessWithId } from "@/types";
-import Link from "next/link";
 import { useContext, useEffect } from "react";
 import useSwr from "swr";
 import { Calendar } from "./Calendar";
