@@ -1,19 +1,11 @@
 import {
-  bodyMarginHeight,
-  dayOfWeekHeight,
   DAY_PADDING,
   DUE_DATE_BACKGROUND_COLOR,
-  headerHeight,
   JUNE_BACKGROUND_COLOR,
   MAY_BACKGROUND_COLOR,
-  totalBorderHeight,
-  totalPaddingHeight,
 } from "@/constants";
-import { daysMap } from "@/constants/days";
 import { CalendarDay, GuessWithId } from "@/types";
 import moment from "moment";
-import { useEffect, useState } from "react";
-import textFit from "textfit";
 
 type Props = {
   day: CalendarDay;
