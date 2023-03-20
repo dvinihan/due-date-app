@@ -66,7 +66,7 @@ export const Calendar = ({ guesses }: Props) => {
     const guessContainerHeight = `(${newDayHeight} - ${dateNumberHeight}px)`;
     const singleGuessHeight = `(${guessContainerHeight} / ${maxGuessesInADay})`;
     setDayHeight(newDayHeight);
-    setGuessFontSize(`(${singleGuessHeight} - 1px)`);
+    setGuessFontSize(`(${singleGuessHeight} - 0.4vh)`);
   }, [maxGuessesInADay]);
 
   return (

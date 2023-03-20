@@ -53,7 +53,7 @@ export const Day = ({ day, guesses, dayHeight, guessFontSize }: Props) => {
             className="guess"
             key={guess._id}
             style={{
-              fontSize: `calc${guessFontSize}`,
+              fontSize: `min(calc${guessFontSize}, 16px)`,
             }}
           >
             <span style={{ color: "darkcyan" }}>
@@ -61,7 +61,7 @@ export const Day = ({ day, guesses, dayHeight, guessFontSize }: Props) => {
             </span>
             <span style={{ color: "gray" }}>
               {" -- "}
-              {guess.name}
+              {guess.firstName} {guess.lastName.slice(0, 1)}.
             </span>
           </div>
         ))}

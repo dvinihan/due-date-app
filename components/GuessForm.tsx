@@ -4,7 +4,8 @@ import { useContext, useState } from "react";
 
 export const GuessForm = () => {
   const { socket } = useContext(AppContext);
-  const [name, setName] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
 
@@ -12,7 +13,8 @@ export const GuessForm = () => {
   const [success, setSuccess] = useState("");
 
   const clearForm = () => {
-    setName("");
+    setFirstName("");
+    setLastName("");
     setDate("");
     setTime("");
   };
@@ -22,14 +24,18 @@ export const GuessForm = () => {
       setError("");
       setSuccess("");
 
-      if (!name || !date || !time) {
+      if (!firstName || !lastName || !date || !time) {
         setError("Please fill in all fields");
         return;
       }
 
       const wholeDate = new Date(`${date} ${time}`);
 
-      const newGuess = new GuessWithoutId({ name, date: wholeDate });
+      const newGuess = new GuessWithoutId({
+        firstName,
+        lastName,
+        date: wholeDate,
+      });
       await fetch("/api/newGuess", {
         method: "POST",
         body: JSON.stringify(newGuess),
@@ -54,8 +60,10 @@ export const GuessForm = () => {
         fontSize: "20px",
       }}
     >
-      <div style={{ marginTop: "30px" }}>Name:</div>
-      <input onChange={(e) => setName(e.target.value)} value={name} />
+      <div style={{ marginTop: "30px" }}>First Name:</div>
+      <input onChange={(e) => setFirstName(e.target.value)} value={firstName} />
+      <div style={{ marginTop: "30px" }}>Last Name:</div>
+      <input onChange={(e) => setLastName(e.target.value)} value={lastName} />
       <div style={{ marginTop: "30px" }}>Date:</div>
       <div style={{ fontSize: "14px", marginBottom: "4px" }}>
         (Baby P is due June 8!)
