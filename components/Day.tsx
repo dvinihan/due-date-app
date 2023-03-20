@@ -12,6 +12,8 @@ import {
 import { daysMap } from "@/constants/days";
 import { CalendarDay, GuessWithId } from "@/types";
 import moment from "moment";
+import { useEffect, useState } from "react";
+import textFit from "textfit";
 
 type Props = {
   day: CalendarDay;
@@ -31,30 +33,68 @@ export const Day = ({ day, guesses }: Props) => {
     (a, b) => a.date.getTime() - b.date.getTime()
   );
 
+  const [dayHeight, setDayHeight] = useState("");
+  const [singleGuessHeight, setSingleGuessHeight] = useState("");
+  const [dayContainerWidth, setDayContainerWidth] = useState<
+    number | undefined
+  >();
+
+  const [textFitDone, setTextFitDone] = useState(false);
+  useEffect(() => {
+    console.log("guess length:", guesses.length);
+    const extraHeights = `${headerHeight} - ${dayOfWeekHeight} - (2 * ${bodyMarginHeight}) - ${totalBorderHeight} - ${totalPaddingHeight}`;
+    const newDayHeight = `(100vh - ${extraHeights}) / ${daysMap.length}`;
+    const dateNumberHeight =
+      document?.getElementById("date-number")?.offsetHeight;
+    const guessContainerHeight = `(${newDayHeight}) - ${dateNumberHeight}px`;
+
+    const guessElements = document?.getElementsByClassName("guess") ?? [];
+    textFit(guessElements);
+
+    setSingleGuessHeight(`(${guessContainerHeight}) / ${guesses.length}`);
+    setDayHeight(newDayHeight);
+    setDayContainerWidth(
+      document?.getElementById("day-container")?.offsetWidth
+    );
+
+    setTextFitDone(true);
+  }, [guesses.length]);
+
+  console.log("");
   return (
-    <div
-      style={{
-        height: `calc((100vh - ${headerHeight} - ${dayOfWeekHeight} - (2 * ${bodyMarginHeight}) - ${totalBorderHeight} - ${totalPaddingHeight}) / ${daysMap.length} )`,
-        backgroundColor,
-        padding: DAY_PADDING,
-        border: "1px solid black",
-        flex: "1 0 13%",
-      }}
-    >
-      <span>{day.date}</span>
-      <div>
-        {sortedGuesses.map((guess) => (
-          <div key={guess._id}>
-            <span style={{ color: "darkcyan" }}>
-              {moment(guess.date).format("h:mm a")}
-            </span>
-            <span style={{ fontSize: "12px", color: "gray" }}>
-              {" -- "}
-              {guess.name}
-            </span>
-          </div>
-        ))}
+    textFitDone && (
+      <div
+        id="day-container"
+        style={{
+          height: `calc(${dayHeight})`,
+          backgroundColor,
+          padding: DAY_PADDING,
+          border: "1px solid black",
+          flex: "1 0 13%",
+        }}
+      >
+        <span id="date-number">{day.date}</span>
+        <div>
+          {sortedGuesses.map((guess) => (
+            <div
+              className="guess"
+              key={guess._id}
+              style={{
+                height: `calc(${singleGuessHeight})`,
+                width: dayContainerWidth,
+              }}
+            >
+              <span style={{ color: "darkcyan" }}>
+                {moment(guess.date).format("h:mm a")}
+              </span>
+              <span style={{ color: "gray" }}>
+                {" -- "}
+                {guess.name}
+              </span>
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
+    )
   );
 };
