@@ -8,7 +8,7 @@ import {
   totalBorderHeight,
   totalPaddingHeight,
   dayColumnSplitGuessCount,
-  RED_COLOR,
+  POOH_RED,
 } from "@/constants";
 import { CalendarDay, GuessWithId } from "@/types";
 import { useEffect, useState } from "react";
@@ -67,7 +67,7 @@ export const Day = ({ day, guesses }: Props) => {
       >
         <span style={{ width: "35%" }}>{day.date}</span>
         {isDueDate && (
-          <span style={{ color: RED_COLOR, width: "65%" }}>{"  "}Due Date</span>
+          <span style={{ color: POOH_RED, width: "65%" }}>{"  "}Due Date</span>
         )}
       </div>
       <div
