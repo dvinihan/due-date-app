@@ -8,11 +8,13 @@ import {
   totalBorderHeight,
   totalPaddingHeight,
   dayColumnSplitGuessCount,
+  RED_COLOR,
 } from "@/constants";
 import { CalendarDay, GuessWithId } from "@/types";
 import { useEffect, useState } from "react";
 import { daysMap } from "@/constants/days";
 import { Guess } from "./Guess";
+import { poohFont } from "@/pages/_app";
 
 type Props = {
   day: CalendarDay;
@@ -44,7 +46,7 @@ export const Day = ({ day, guesses }: Props) => {
     const guessDivider = Math.min(guesses.length, dayColumnSplitGuessCount);
     const singleGuessHeight = `(${guessContainerHeight} / ${guessDivider})`;
     setDayHeight(newDayHeight);
-    setGuessFontSize(`(${singleGuessHeight} - 0.4vh)`); // leave some buffer
+    setGuessFontSize(`(${singleGuessHeight} - 0.3vh)`); // leave some buffer
   }, [guesses.length]);
 
   return (
@@ -58,7 +60,16 @@ export const Day = ({ day, guesses }: Props) => {
         flex: "1 0 13%",
       }}
     >
-      <span id="date-number">{day.date}</span>
+      <div
+        className={poohFont.className}
+        id="date-number"
+        style={{ display: "flex" }}
+      >
+        <span style={{ width: "35%" }}>{day.date}</span>
+        {isDueDate && (
+          <span style={{ color: RED_COLOR, width: "65%" }}>{"  "}Due Date</span>
+        )}
+      </div>
       <div
         style={{
           display: "flex",

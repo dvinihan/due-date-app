@@ -1,3 +1,4 @@
+import { RED_COLOR } from "@/constants";
 import { GuessWithId } from "@/types";
 import moment from "moment";
 
@@ -18,7 +19,7 @@ export const Guess = ({ guess, guessFontSize }: GuessProps) => {
         fontSize: `min(calc${guessFontSize}, 16px)`,
       }}
     >
-      <span style={{ color: "darkcyan" }}>
+      <span style={{ color: RED_COLOR }}>
         {moment(guess.date).format("h:mm a")}
       </span>
       <span style={{ color: "gray" }}>

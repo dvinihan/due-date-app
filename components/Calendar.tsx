@@ -45,7 +45,6 @@ export const Calendar = ({ guesses }: Props) => {
         className={poohFont.className}
         style={{
           height: headerHeight,
-          border: "1px solid black",
           textAlign: "center",
           fontSize: "50px",
           display: "flex",
