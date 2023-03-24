@@ -8,7 +8,7 @@ import Image from "next/image";
 import winnieThePooh from "../public/winnie-the-pooh.webp";
 import tigger from "../public/tigger.png";
 
-const IMAGE_HEIGHT = 50;
+const IMAGE_HEIGHT = 70;
 const monthMap = {
   May: 5,
   June: 6,
@@ -47,21 +47,21 @@ export const Calendar = ({ guesses }: Props) => {
           height: headerHeight,
           border: "1px solid black",
           textAlign: "center",
-          fontSize: "43px",
+          fontSize: "50px",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
         }}
       >
         <Image
-          style={{ margin: "0 10px" }}
+          style={{ margin: "0 30px" }}
           src={winnieThePooh}
           alt="Pooh and Piglet"
           height={IMAGE_HEIGHT}
         />
         When will Baby P arrive?
         <Image
-          style={{ margin: "0 10px" }}
+          style={{ margin: "0 30px" }}
           src={tigger}
           alt="Tigger"
           height={IMAGE_HEIGHT}
@@ -74,21 +74,6 @@ export const Calendar = ({ guesses }: Props) => {
           flexWrap: "wrap",
         }}
       >
-        {daysMap[0].map((day, i) => (
-          <div
-            key={i}
-            style={{
-              height: dayOfWeekHeight,
-              border: "1px solid black",
-              display: "inline-block",
-              backgroundColor: "lightgray",
-              padding: DAY_PADDING,
-              flex: "1 0 13%",
-            }}
-          >
-            {day.dayOfWeek}
-          </div>
-        ))}
         {daysMap.map((week) =>
           week.map((day, j) => (
             <Day
