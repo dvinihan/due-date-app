@@ -16,3 +16,4 @@ export const totalBorderHeight = `${2 + daysMap.length * 2}px`;
 export const totalPaddingHeight = `${
   (daysMap.length + 1) * 2 * dayPaddingAmount
 }px`;
+export const dayColumnSplitGuessCount = 14;
