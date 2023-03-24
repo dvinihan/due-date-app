@@ -52,61 +52,79 @@ export const GuessForm = () => {
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        alignItems: "center",
-        flexDirection: "column",
-        fontSize: "20px",
-      }}
-    >
+    <>
       <div
-        style={{
-          marginTop: "30px",
-          display: "flex",
-          justifyContent: "space-between",
-        }}
+        style={{ display: "flex", justifyContent: "center", marginTop: "50px" }}
       >
-        <div style={{ margin: "15px" }}>
-          <div>First Name:</div>
-          <input
-            onChange={(e) => setFirstName(e.target.value)}
-            value={firstName}
-          />
+        {/* column 1 */}
+        <div
+          style={{
+            display: "flex",
+            alignItems: "end",
+            flexDirection: "column",
+            fontSize: "20px",
+          }}
+        >
+          <div style={{ margin: "15px" }}>
+            <div>First Name:</div>
+            <input
+              onChange={(e) => setFirstName(e.target.value)}
+              value={firstName}
+            />
+          </div>
+          <div style={{ margin: "15px" }}>
+            <div>Date:</div>
+            <input
+              type="date"
+              onChange={(e) => setDate(e.target.value)}
+              value={date}
+              min="2023-05-28"
+              max="2023-06-17"
+            />
+            <div style={{ fontSize: "14px", marginBottom: "4px" }}>
+              (Baby P is due June 8!)
+            </div>
+          </div>
         </div>
-        <div style={{ margin: "15px" }}>
-          <div>Last Name:</div>
-          <input
-            onChange={(e) => setLastName(e.target.value)}
-            value={lastName}
-          />
+        {/* column 2 */}
+        <div
+          style={{
+            display: "flex",
+            alignItems: "start",
+            flexDirection: "column",
+            fontSize: "20px",
+          }}
+        >
+          <div style={{ margin: "15px" }}>
+            <div>Last Name:</div>
+            <input
+              onChange={(e) => setLastName(e.target.value)}
+              value={lastName}
+            />
+          </div>
+          <div style={{ margin: "15px" }}>
+            <div>Time:</div>
+            <input
+              type="time"
+              onChange={(e) => setTime(e.target.value)}
+              value={time}
+            />
+          </div>
         </div>
       </div>
-      <div style={{ marginTop: "30px" }}>Date:</div>
-      <div style={{ fontSize: "14px", marginBottom: "4px" }}>
-        (Baby P is due June 8!)
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <div>
+          <button onClick={handleSubmit} style={{ marginTop: "30px" }}>
+            Submit
+          </button>
+          {error && (
+            <div style={{ color: "red", marginTop: "30px" }}>{error}</div>
+          )}
+          {success && (
+            <div style={{ color: "green", marginTop: "30px" }}>{success}</div>
+          )}
+        </div>
       </div>
-      <input
-        type="date"
-        onChange={(e) => setDate(e.target.value)}
-        value={date}
-        min="2023-05-28"
-        max="2023-06-17"
-      />
-      <div style={{ marginTop: "30px" }}>Time:</div>
-      <input
-        type="time"
-        onChange={(e) => setTime(e.target.value)}
-        value={time}
-      />
-
-      <button onClick={handleSubmit} style={{ marginTop: "30px" }}>
-        Submit
-      </button>
-      {error && <div style={{ color: "red", marginTop: "30px" }}>{error}</div>}
-      {success && (
-        <div style={{ color: "green", marginTop: "30px" }}>{success}</div>
-      )}
-    </div>
+    </>
   );
 };
