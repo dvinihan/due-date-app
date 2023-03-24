@@ -3,6 +3,7 @@ import { useMemo } from "react";
 import { Day } from "./Day";
 import { dayOfWeekHeight, DAY_PADDING, headerHeight } from "@/constants";
 import { daysMap } from "@/constants/days";
+import { parisienne } from "@/pages/_app";
 
 const monthMap = {
   May: 5,
@@ -37,15 +38,15 @@ export const Calendar = ({ guesses }: Props) => {
   return (
     <>
       <div
+        className={parisienne.className}
         style={{
           height: headerHeight,
           border: "1px solid black",
           textAlign: "center",
-          fontSize: "30px",
-          fontFamily: "cursive",
+          fontSize: "43px",
         }}
       >
-        When will &quot;Baby P&quot; arrive?
+        When will Baby P arrive?
       </div>
       <div
         style={{
