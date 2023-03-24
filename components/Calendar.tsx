@@ -1,9 +1,9 @@
 import { GuessWithId } from "@/types";
 import { useMemo } from "react";
 import { Day } from "./Day";
-import { dayOfWeekHeight, DAY_PADDING, headerHeight } from "@/constants";
+import { headerHeight } from "@/constants";
 import { daysMap } from "@/constants/days";
-import { parisienne } from "@/pages/_app";
+import { poohFont } from "@/pages/_app";
 import Image from "next/image";
 import winnieThePooh from "../public/winnie-the-pooh.webp";
 import tigger from "../public/tigger.png";
@@ -42,7 +42,7 @@ export const Calendar = ({ guesses }: Props) => {
   return (
     <>
       <div
-        className={parisienne.className}
+        className={poohFont.className}
         style={{
           height: headerHeight,
           border: "1px solid black",

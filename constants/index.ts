@@ -10,7 +10,6 @@ export const MAY_BACKGROUND_COLOR = "#ffe6fe";
 export const JUNE_BACKGROUND_COLOR = "#fff5e6";
 
 export const headerHeight = "11vh";
-export const dayOfWeekHeight = "0vh";
 export const bodyMarginHeight = "0.5vh";
 export const totalBorderHeight = `${2 + daysMap.length * 2}px`;
 export const totalPaddingHeight = `${

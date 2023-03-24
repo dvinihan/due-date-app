@@ -4,7 +4,6 @@ import {
   JUNE_BACKGROUND_COLOR,
   MAY_BACKGROUND_COLOR,
   bodyMarginHeight,
-  dayOfWeekHeight,
   headerHeight,
   totalBorderHeight,
   totalPaddingHeight,
@@ -37,7 +36,7 @@ export const Day = ({ day, guesses }: Props) => {
   const [guessFontSize, setGuessFontSize] = useState("");
 
   useEffect(() => {
-    const extraHeights = `${headerHeight} - ${dayOfWeekHeight} - (2 * ${bodyMarginHeight}) - ${totalBorderHeight} - ${totalPaddingHeight}`;
+    const extraHeights = `${headerHeight} - (2 * ${bodyMarginHeight}) - ${totalBorderHeight} - ${totalPaddingHeight}`;
     const newDayHeight = `((100vh - ${extraHeights}) / ${daysMap.length})`;
     const dateNumberHeight =
       document?.getElementById("date-number")?.offsetHeight;

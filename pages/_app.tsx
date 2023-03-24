@@ -1,12 +1,9 @@
 import { WEB_SOCKET_URL } from "@/constants";
 import type { AppProps } from "next/app";
 import { createContext, useEffect, useState } from "react";
-import { Parisienne } from "next/font/google";
+import localFont from "next/font/local";
 
-export const parisienne = Parisienne({
-  weight: "400",
-  subsets: ["latin"],
-});
+export const poohFont = localFont({ src: "./pooh.ttf" });
 
 type AppContextType = {
   socket: WebSocket | undefined;
