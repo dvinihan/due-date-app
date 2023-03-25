@@ -1,14 +1,12 @@
 import {
   DAY_PADDING,
-  DUE_DATE_BACKGROUND_COLOR,
-  JUNE_BACKGROUND_COLOR,
-  MAY_BACKGROUND_COLOR,
   bodyMarginHeight,
   headerHeight,
   totalBorderHeight,
   totalPaddingHeight,
   dayColumnSplitGuessCount,
   POOH_RED,
+  POOH_YELLOW,
 } from "@/constants";
 import { CalendarDay, GuessWithId } from "@/types";
 import { useEffect, useState } from "react";
@@ -23,12 +21,6 @@ type Props = {
 
 export const Day = ({ day, guesses }: Props) => {
   const isDueDate = day.month === "June" && day.date === 8;
-
-  const backgroundColor = isDueDate
-    ? DUE_DATE_BACKGROUND_COLOR
-    : day.month === "June"
-    ? JUNE_BACKGROUND_COLOR
-    : MAY_BACKGROUND_COLOR;
 
   const sortedGuesses = guesses.sort(
     (a, b) => a.date.getTime() - b.date.getTime()
@@ -54,7 +46,7 @@ export const Day = ({ day, guesses }: Props) => {
       id="day-container"
       style={{
         height: `calc${dayHeight}`,
-        backgroundColor,
+        backgroundColor: POOH_YELLOW,
         padding: DAY_PADDING,
         border: "1px solid black",
         flex: "1 0 13%",

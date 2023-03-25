@@ -2,7 +2,6 @@ import { WEB_SOCKET_URL } from "@/constants";
 import type { AppProps } from "next/app";
 import { createContext, useEffect, useState } from "react";
 import localFont from "next/font/local";
-import "./global.css";
 
 export const poohFont = localFont({ src: "./pooh.ttf" });
 
