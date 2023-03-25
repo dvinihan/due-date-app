@@ -52,6 +52,12 @@ export const GuessForm = () => {
     socket?.send("refresh");
   };
 
+  const handleDateClick = () => {
+    if (!date) {
+      setDate("2023-06-08");
+    }
+  };
+
   return (
     <div
       style={{
@@ -105,6 +111,7 @@ export const GuessForm = () => {
             <input
               type="date"
               onChange={(e) => setDate(e.target.value)}
+              onClick={handleDateClick}
               value={date}
               min="2023-05-28"
               max="2023-06-17"
@@ -137,14 +144,26 @@ export const GuessForm = () => {
             alignItems: "center",
           }}
         >
-          <button onClick={handleSubmit} style={{ width: "80px" }}>
+          <button
+            onClick={handleSubmit}
+            style={{ width: "80px" }}
+            className={poohFont.className}
+          >
             Submit
           </button>
           {error && (
-            <div style={{ color: POOH_RED, marginTop: "10px" }}>{error}</div>
+            <div
+              style={{ color: POOH_RED, marginTop: "10px" }}
+              className={poohFont.className}
+            >
+              {error}
+            </div>
           )}
           {success && (
-            <div style={{ color: "darkgreen", marginTop: "10px" }}>
+            <div
+              style={{ color: "darkgreen", marginTop: "10px" }}
+              className={poohFont.className}
+            >
               {success}
             </div>
           )}
