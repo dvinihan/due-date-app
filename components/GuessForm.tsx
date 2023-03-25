@@ -86,7 +86,10 @@ export const GuessForm = () => {
               min="2023-05-28"
               max="2023-06-17"
             />
-            <div style={{ fontSize: "14px", marginBottom: "4px" }}>
+            <div
+              className={poohFont.className}
+              style={{ fontSize: "14px", marginBottom: "4px" }}
+            >
               (Baby P is due June 8!)
             </div>
           </div>
