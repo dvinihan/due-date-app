@@ -43,7 +43,7 @@ export const GuessForm = () => {
       });
 
       clearForm();
-      setSuccess("Great guess!");
+      setSuccess("Your guess was submitted!");
     } catch (error) {
       setError("Oops, that didn't work. Please try again.");
     }
@@ -53,20 +53,34 @@ export const GuessForm = () => {
   };
 
   return (
-    <>
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        flexDirection: "column",
+      }}
+    >
       <div
-        style={{ display: "flex", justifyContent: "center", marginTop: "50px" }}
+        style={{
+          display: "flex",
+          alignItems: "center",
+          flexDirection: "column",
+          maxWidth: "480px",
+        }}
       >
-        {/* column 1 */}
         <div
           style={{
             display: "flex",
-            alignItems: "end",
-            flexDirection: "column",
-            fontSize: "20px",
+            flexWrap: "wrap",
+            justifyContent: "center",
           }}
         >
-          <div style={{ margin: "15px" }}>
+          <div
+            style={{
+              margin: "15px",
+              textAlign: "center",
+            }}
+          >
             <div className={poohFont.className} style={{ color: POOH_RED }}>
               First Name:
             </div>
@@ -75,7 +89,16 @@ export const GuessForm = () => {
               value={firstName}
             />
           </div>
-          <div style={{ margin: "15px" }}>
+          <div style={{ margin: "15px", textAlign: "center" }}>
+            <div className={poohFont.className} style={{ color: POOH_RED }}>
+              Last Name:
+            </div>
+            <input
+              onChange={(e) => setLastName(e.target.value)}
+              value={lastName}
+            />
+          </div>
+          <div style={{ margin: "15px", width: "204px", textAlign: "center" }}>
             <div className={poohFont.className} style={{ color: POOH_RED }}>
               Date:
             </div>
@@ -85,6 +108,7 @@ export const GuessForm = () => {
               value={date}
               min="2023-05-28"
               max="2023-06-17"
+              style={{ minWidth: "150px" }}
             />
             <div
               className={poohFont.className}
@@ -93,26 +117,7 @@ export const GuessForm = () => {
               (Baby P is due June 8!)
             </div>
           </div>
-        </div>
-        {/* column 2 */}
-        <div
-          style={{
-            display: "flex",
-            alignItems: "start",
-            flexDirection: "column",
-            fontSize: "20px",
-          }}
-        >
-          <div style={{ margin: "15px" }}>
-            <div className={poohFont.className} style={{ color: POOH_RED }}>
-              Last Name:
-            </div>
-            <input
-              onChange={(e) => setLastName(e.target.value)}
-              value={lastName}
-            />
-          </div>
-          <div style={{ margin: "15px" }}>
+          <div style={{ margin: "15px", width: "204px", textAlign: "center" }}>
             <div className={poohFont.className} style={{ color: POOH_RED }}>
               Time:
             </div>
@@ -120,28 +125,31 @@ export const GuessForm = () => {
               type="time"
               onChange={(e) => setTime(e.target.value)}
               value={time}
+              style={{ minWidth: "150px" }}
             />
           </div>
         </div>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            margin: "15px",
+            alignItems: "center",
+          }}
+        >
+          <button onClick={handleSubmit} style={{ width: "80px" }}>
+            Submit
+          </button>
+          {error && (
+            <div style={{ color: POOH_RED, marginTop: "10px" }}>{error}</div>
+          )}
+          {success && (
+            <div style={{ color: "darkgreen", marginTop: "10px" }}>
+              {success}
+            </div>
+          )}
+        </div>
       </div>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <button onClick={handleSubmit} style={{ marginTop: "30px" }}>
-          Submit
-        </button>
-        {error && (
-          <div style={{ color: POOH_RED, marginTop: "10px" }}>{error}</div>
-        )}
-        {success && (
-          <div style={{ color: "darkgreen", marginTop: "10px" }}>{success}</div>
-        )}
-      </div>
-    </>
+    </div>
   );
 };
