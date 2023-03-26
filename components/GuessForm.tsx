@@ -74,6 +74,14 @@ export const GuessForm = () => {
           maxWidth: "480px",
         }}
       >
+        <div>
+          <h1 className={poohFont.className} style={{ textAlign: "center" }}>
+            Guess Baby P&apos;s Birthday!
+          </h1>
+          <h3 className={poohFont.className} style={{ textAlign: "center" }}>
+            Fill in the information below to add your guess to the calendar!
+          </h3>
+        </div>
         <div
           style={{
             display: "flex",
