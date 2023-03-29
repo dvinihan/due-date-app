@@ -25,10 +25,7 @@ export const Calendar = ({ guesses }: Props) => {
   const guessesByDate = useMemo(
     () =>
       guesses.reduce((acc, guess) => {
-        const guessKey = getGuessKey(
-          guess.date.getMonth() + 1,
-          guess.date.getDate()
-        );
+        const guessKey = getGuessKey(guess.month, guess.date);
         if (acc.has(guessKey)) {
           acc.get(guessKey)?.push(guess);
         } else {

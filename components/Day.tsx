@@ -19,11 +19,15 @@ type Props = {
   guesses: GuessWithId[];
 };
 
+const getDate = (guess: GuessWithId) => {
+  return new Date(`2023-${guess.month}-${guess.date}T${guess.time}`);
+};
+
 export const Day = ({ day, guesses }: Props) => {
   const isDueDate = day.month === "June" && day.date === 8;
 
   const sortedGuesses = guesses.sort(
-    (a, b) => a.date.getTime() - b.date.getTime()
+    (a, b) => getDate(a).getTime() - getDate(b).getTime()
   );
 
   const [dayHeight, setDayHeight] = useState("");

@@ -30,12 +30,14 @@ export const GuessForm = () => {
         return;
       }
 
-      const wholeDate = new Date(`${date} ${time}`);
+      const [_, m, d] = date.split("-");
 
       const newGuess = new GuessWithoutId({
         firstName,
         lastName,
-        date: wholeDate,
+        date: Number.parseInt(d),
+        month: Number.parseInt(m),
+        time,
       });
       await fetch("/api/newGuess", {
         method: "POST",
