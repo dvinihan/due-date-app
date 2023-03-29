@@ -20,7 +20,8 @@ type Props = {
 };
 
 const getDate = (guess: GuessWithId) => {
-  return new Date(`2023-${guess.month}-${guess.date}T${guess.time}`);
+  const date = guess.date < 10 ? `0${guess.date}` : guess.date;
+  return new Date(`2023-0${guess.month}-${date}T${guess.time}`);
 };
 
 export const Day = ({ day, guesses }: Props) => {

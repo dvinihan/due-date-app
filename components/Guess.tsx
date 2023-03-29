@@ -9,7 +9,11 @@ type GuessProps = {
 const getTime = (time: string) => {
   const [hour, minute] = time.split(":");
   const hourInt = parseInt(hour);
-  if (hourInt > 12) {
+  if (hourInt === 12) {
+    return `12:${minute} pm`;
+  } else if (hourInt === 0) {
+    return `12:${minute} am`;
+  } else if (hourInt > 11) {
     return `${hourInt - 12}:${minute} pm`;
   } else {
     return `${hourInt}:${minute} am`;
